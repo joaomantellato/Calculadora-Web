@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#140f1f" />
+    <meta name="description" content="Calculadora web responsiva com operações básicas e suporte ao teclado." />
+    <title>Calculadora online</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="workspace" aria-label="Calculadora">
+        <div class="calculator-card">
+          <div class="calculator-topline">
+            <span>CALCULADORA ONLINE</span>
+            <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Ativar tema claro" title="Alternar tema">
+              <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
+              <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 15.3A8.5 8.5 0 0 1 8.7 3.8 8.5 8.5 0 1 0 20.2 15.3Z"/></svg>
+            </button>
+          </div>
+          <div class="display" aria-live="polite" aria-atomic="true">
+            <div class="expression" id="expression" aria-label="Operação atual"></div>
+            <output class="result" id="display" for="calculator-buttons" aria-label="Visor" role="status">0</output>
+          </div>
+          <div class="keypad" id="calculator-buttons" aria-label="Teclado da calculadora">
+            <button class="key key-function" data-action="clear" aria-label="Limpar tudo">AC</button>
+            <button class="key key-function" data-action="sign" aria-label="Inverter sinal">+/−</button>
+            <button class="key key-function" data-action="percent" aria-label="Porcentagem">%</button>
+            <button class="key key-operator" data-operator="÷" aria-label="Dividir">÷</button>
+
+            <button class="key" data-number="7">7</button><button class="key" data-number="8">8</button><button class="key" data-number="9">9</button><button class="key key-operator" data-operator="×" aria-label="Multiplicar">×</button>
+            <button class="key" data-number="4">4</button><button class="key" data-number="5">5</button><button class="key" data-number="6">6</button><button class="key key-operator" data-operator="−" aria-label="Subtrair">−</button>
+            <button class="key" data-number="1">1</button><button class="key" data-number="2">2</button><button class="key" data-number="3">3</button><button class="key key-operator" data-operator="+" aria-label="Somar">+</button>
+            <button class="key key-function key-backspace" data-action="backspace" aria-label="Apagar último dígito"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5H20a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H9l-7-7 7-7Z"/><path d="m12 9 6 6m0-6-6 6"/></svg></button>
+            <button class="key" data-number="0">0</button><button class="key" data-action="decimal" aria-label="Vírgula decimal">,</button>
+            <button class="key key-equals" data-action="equals" aria-label="Calcular resultado">=</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

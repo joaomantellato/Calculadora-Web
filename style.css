@@ -1,0 +1,275 @@
+/* ===== Tema "Crepúsculo": roxo profundo com destaque coral ===== */
+:root {
+  color-scheme: dark;
+  --page: #140f1f;
+  --page-glow: #2a1740;
+  --card: #1d1630;
+  --card-edge: #33284d;
+  --display: #120d1e;
+  --line: #2d2345;
+  --key: #282040;
+  --key-hover: #342a52;
+  --fn: #2f2547;
+  --fn-hover: #3b2f58;
+  --fn-text: #c9bde6;
+  --text: #f6f1ff;
+  --muted: #a397c2;
+  --faint: #6f6390;
+  --accent: #ff7a59;
+  --accent-2: #ffb347;
+  --accent-hover: #ff9273;
+  --accent-ink: #2a0f08;
+  --operator: #3a2440;
+  --operator-hover: #4a2d4f;
+  --shadow: 0 30px 80px #0007, 0 0 0 1px #ffffff08 inset;
+  --radius-card: 26px;
+  --radius-key: 16px;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+body.light-theme {
+  color-scheme: light;
+  --page: #fbf4ec;
+  --page-glow: #ffe1cf;
+  --card: #fffaf5;
+  --card-edge: #f0dfd1;
+  --display: #fdf0e5;
+  --line: #f1dccb;
+  --key: #f7ece2;
+  --key-hover: #f1e0d1;
+  --fn: #efe2f3;
+  --fn-hover: #e5d3ec;
+  --fn-text: #6b4d80;
+  --text: #2b1d2f;
+  --muted: #8a7488;
+  --faint: #b39fae;
+  --accent: #f0603d;
+  --accent-2: #f59e2b;
+  --accent-hover: #e2512f;
+  --accent-ink: #fff;
+  --operator: #ffe6dc;
+  --operator-hover: #ffd7c8;
+  --shadow: 0 30px 70px #a0583a1f, 0 2px 8px #a0583a12;
+}
+
+/* ===== Base ===== */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 15% 10%, var(--page-glow), transparent 45%),
+    radial-gradient(circle at 90% 95%, var(--page-glow), transparent 40%),
+    var(--page);
+  transition: background-color .3s ease, color .3s ease;
+}
+
+button { font: inherit; }
+
+/* ===== Layout ===== */
+.app-shell {
+  width: 100%;
+  min-height: 100vh;
+  padding: 32px;
+  display: grid;
+  place-items: center;
+}
+
+.workspace {
+  width: 100%;
+  max-width: 400px;
+}
+
+/* ===== Cartão ===== */
+.calculator-card {
+  width: 100%;
+  padding: 26px;
+  border: 1px solid var(--card-edge);
+  border-radius: var(--radius-card);
+  background: var(--card);
+  box-shadow: var(--shadow);
+}
+
+.calculator-topline {
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--faint);
+  font: 600 10px 'JetBrains Mono', monospace;
+  letter-spacing: 2px;
+}
+
+.calculator-topline span::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  vertical-align: 0;
+}
+
+.theme-toggle {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--card-edge);
+  border-radius: 50%;
+  background: var(--key);
+  color: var(--muted);
+  cursor: pointer;
+  transition: color .2s ease, border-color .2s ease, transform .3s ease;
+}
+
+.theme-toggle:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  transform: rotate(25deg);
+}
+
+.theme-toggle svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.moon-icon { display: none; }
+body.light-theme .sun-icon { display: none; }
+body.light-theme .moon-icon { display: inline; }
+
+/* ===== Visor ===== */
+.display {
+  height: 132px;
+  margin-bottom: 20px;
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--display);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.expression {
+  width: 100%;
+  min-height: 18px;
+  color: var(--muted);
+  font: 13px 'JetBrains Mono', monospace;
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.result {
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  color: var(--text);
+  font: 500 42px 'JetBrains Mono', monospace;
+  letter-spacing: -1.5px;
+  line-height: 1;
+}
+
+.result.small { font-size: 28px; }
+
+/* ===== Teclado ===== */
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.key {
+  height: 62px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-key);
+  background: var(--key);
+  color: var(--text);
+  font-size: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background .15s ease, color .15s ease, transform .1s ease, box-shadow .15s ease;
+}
+
+.key:hover { background: var(--key-hover); }
+.key:active { transform: translateY(1px) scale(.97); }
+
+.key:focus-visible,
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.key-function {
+  background: var(--fn);
+  color: var(--fn-text);
+  font-size: 15px;
+}
+
+.key-function:hover { background: var(--fn-hover); }
+
+.key-operator {
+  background: var(--operator);
+  color: var(--accent);
+  font-size: 23px;
+}
+
+.key-operator:hover { background: var(--operator-hover); }
+
+.key-operator.is-selected {
+  background: var(--accent);
+  color: var(--accent-ink);
+  box-shadow: 0 6px 18px color-mix(in srgb, var(--accent) 40%, transparent);
+}
+
+.key-backspace svg {
+  width: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vertical-align: middle;
+}
+
+.key-equals {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: var(--accent-ink);
+  font-size: 24px;
+  font-weight: 600;
+  box-shadow: 0 8px 22px color-mix(in srgb, var(--accent) 35%, transparent);
+}
+
+.key-equals:hover { filter: brightness(1.08); }
+
+/* ===== Responsivo ===== */
+@media (max-width: 650px) {
+  .app-shell { padding: 18px; }
+  .calculator-card { padding: 20px; }
+}
+
+@media (max-width: 380px) {
+  .app-shell { padding: 12px; }
+  .calculator-card { padding: 15px; border-radius: 20px; }
+  .keypad { gap: 8px; }
+  .key { height: 54px; border-radius: 13px; }
+  .result { font-size: 34px; }
+}
